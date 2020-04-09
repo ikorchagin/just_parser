@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using Microsoft.Win32;
+using System.Xml;
 
 namespace JustParser
 {
@@ -32,7 +33,7 @@ namespace JustParser
 
         private void CheckForUpdates()
         {
-
+        
         }
 
         private void Parser_Start(object sender, RoutedEventArgs e)
