@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustParserLib", "JustParserLib\JustParserLib.csproj", "{E7BFCC2C-17AD-4B50-AF18-B6B900710716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustParser", "JustParser\JustParser.csproj", "{78CF7258-E7B6-481B-B56B-743208A702C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E7BFCC2C-17AD-4B50-AF18-B6B900710716} = {E7BFCC2C-17AD-4B50-AF18-B6B900710716}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7BFCC2C-17AD-4B50-AF18-B6B900710716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7BFCC2C-17AD-4B50-AF18-B6B900710716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7BFCC2C-17AD-4B50-AF18-B6B900710716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7BFCC2C-17AD-4B50-AF18-B6B900710716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CF7258-E7B6-481B-B56B-743208A702C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CF7258-E7B6-481B-B56B-743208A702C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CF7258-E7B6-481B-B56B-743208A702C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CF7258-E7B6-481B-B56B-743208A702C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CB62639-BDD7-4D86-8143-0000B3BD89B8}
+	EndGlobalSection
+EndGlobal
