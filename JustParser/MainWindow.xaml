@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         materialDesign:ThemeAssist.Theme="Dark"
         MinWidth="750" MinHeight="400"
-        Height="500" Width="800" Icon="icons/icon.png">
+        Height="500" Width="800">
     <Window.Resources>
         <materialDesign:BooleanToVisibilityConverter x:Key="b2v"/>
     </Window.Resources>
