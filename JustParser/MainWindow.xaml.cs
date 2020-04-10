@@ -261,6 +261,13 @@ namespace JustParser
                 });
 
                 progress.Value += 20;
+                if (!File.Exists("Unpacker.exe"))
+                {
+                    await Task.Run(() =>
+                    {
+                        client.DownloadFile("https://raw.githubusercontent.com/TheVenYear/unpacker/release/Unpacker.exe", "Unpacker.exe");
+                    });
+                }
             }
 
             Application.Current.Shutdown();
