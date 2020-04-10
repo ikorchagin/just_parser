@@ -3,4 +3,7 @@
   <git-link>
     https://codeload.github.com/TheVenYear/just_parser/zip/release
   </git-link>
+  <git-data>
+    https://raw.githubusercontent.com/TheVenYear/just_parser/release/Data.xml
+  </git-data>
 </program>
