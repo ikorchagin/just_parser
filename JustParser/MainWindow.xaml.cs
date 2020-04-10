@@ -32,8 +32,16 @@ namespace JustParser
         ParserBase<DataTable> parser;
         public MainWindow()
         {
+            this.Title = GetProgramName();
             InitializeComponent();
             CheckForUpdates();
+        }
+
+        private string GetProgramName()
+        {
+            var reader = new XmlTextReader(@"Data.xml");
+            reader.ReadToFollowing("program");
+            return $"{reader.GetAttribute("title")} v{reader.GetAttribute("version")}";
         }
 
         private async void CheckForUpdates()
@@ -258,6 +266,11 @@ namespace JustParser
             Application.Current.Shutdown();
             Process.Start("Unpacker.exe");
 
+        }
+
+        private void ClearLink(object sender, RoutedEventArgs e)
+        {
+            link.Text = "";
         }
     }
 }
