@@ -29,8 +29,8 @@
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock VerticalAlignment="Center" Margin="0 0 8 0">Обновления отсутствуют</TextBlock>
-                <Button IsEnabled="False" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" Width="25" HorizontalAlignment="Right" Height="25">
+                <TextBlock VerticalAlignment="Center" Margin="0 0 8 0" Name="upd">Обновления отсутствуют</TextBlock>
+                <Button IsEnabled="False" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" Name="updButton" Width="25" HorizontalAlignment="Right" Height="25" Click="DownloadUpdate">
                     <Image Source="icons/update.png" Stretch="Fill" Margin="2"></Image>
                 </Button>
             </StackPanel>

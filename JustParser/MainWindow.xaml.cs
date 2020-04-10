@@ -17,6 +17,10 @@ using System.Windows.Shapes;
 using System.Data;
 using Microsoft.Win32;
 using System.Xml;
+using System.Net;
+using System.IO.Compression;
+using System.IO;
+using System.Diagnostics;
 
 namespace JustParser
 {
@@ -29,11 +33,51 @@ namespace JustParser
         public MainWindow()
         {
             InitializeComponent();
+            CheckForUpdates();
         }
 
-        private void CheckForUpdates()
+        private async void CheckForUpdates()
         {
-        
+            var reader = new XmlTextReader(@"Data.xml");
+            string gitVersion = "", localVersion = "";
+
+            if (reader.ReadToFollowing("program"))
+            {
+                localVersion = reader.GetAttribute("version");
+            }
+
+            using (WebClient client = new WebClient())
+            {
+                reader.ReadToFollowing("git-data");
+                var response = await client.DownloadStringTaskAsync(reader.ReadElementContentAsString());
+                var document = new XmlDocument();
+                document.LoadXml(response);
+                gitVersion = document.SelectSingleNode(".//program").Attributes.GetNamedItem("version").InnerText;
+            }
+
+            if (localVersion != gitVersion)
+            {
+                EnableUpdateBtn(true);
+            }
+            else
+            {
+                EnableUpdateBtn(false);
+            }
+
+        }
+
+        private void EnableUpdateBtn(bool val)
+        {
+            if (val)
+            {
+                upd.Text = "Доступно обновление";
+                updButton.IsEnabled = true;
+            }
+            else
+            {
+                upd.Text = "Обновления отсутствуют";
+                updButton.IsEnabled = false;
+            }
         }
 
         private void Parser_Start(object sender, RoutedEventArgs e)
@@ -48,7 +92,7 @@ namespace JustParser
 
             else
             {
-                parser = new AvitoParser(new AvitoParserSettings() { Url = link.Text});
+                parser = new AvitoParser(new AvitoParserSettings() { Url = link.Text });
             }
             parser.NewData += Parser_NewData;
             parser.WorkDone += Parser_WorkDone;
@@ -156,6 +200,63 @@ namespace JustParser
             {
                 parser.Abort();
             }
+
+        }
+
+        private async void DownloadUpdate(object sender, RoutedEventArgs e)
+        {
+            using (WebClient client = new WebClient())
+            {
+                var reader = new XmlTextReader(@"Data.xml");
+                reader.ReadToFollowing("git-link");
+                progress.Visibility = Visibility.Visible;
+
+                await Task.Run(() =>
+                {
+                    client.DownloadFile(new Uri(reader.ReadElementContentAsString()), "temp.zip");
+                });
+
+                progress.Value += 20;
+
+                await Task.Run(() =>
+                {
+                    if (Directory.Exists("temp"))
+                    {
+                        Directory.Delete("temp", true);
+                    }
+                    ZipFile.ExtractToDirectory("temp.zip", "temp");
+                });
+
+                progress.Value += 20;
+
+                await Task.Run(() =>
+                {
+                    File.Delete("temp.zip");
+                });
+
+                progress.Value += 20;
+
+                await Task.Run(() =>
+                {
+                    if (Directory.Exists("patch"))
+                    {
+                        Directory.Delete("patch", true);
+                    }
+                    Directory.Move(Directory.GetDirectories("temp").First(), "patch");
+                });
+
+                progress.Value += 20;
+
+                await Task.Run(() =>
+                {
+                    Directory.Delete("temp");
+                });
+
+                progress.Value += 20;
+            }
+
+            Application.Current.Shutdown();
+            Process.Start("Unpacker.exe");
 
         }
     }
