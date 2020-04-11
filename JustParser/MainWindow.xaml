@@ -63,7 +63,7 @@
                     <TextBlock Grid.Column="1" x:Name="errorBox" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="17" Foreground="#FFD17C7C" Background="{x:Null}"/>
                 </Grid>
             </StackPanel>
-            <DataGrid Grid.Row="2" x:Name="data" Visibility="Hidden" Background="{DynamicResource MaterialDesignDarkBackground}"/>
+            <DataGrid Grid.Row="2" x:Name="data" Visibility="Hidden" Background="{DynamicResource MaterialDesignDarkBackground}" IsReadOnly="True"/>
             <Grid Margin="0 15 0 0" Grid.Row="3" MaxWidth="1000">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -42,7 +42,7 @@ namespace JustParserLib
                 if (response.IsSuccessStatusCode)
                 {
                     var html = await response.Content.ReadAsStringAsync();
-                    await Task.Delay(3000);
+                    await Task.Delay(2500);
                     await Task.Run(() => document.LoadHtml(html));
                     return document;
                 }
@@ -70,6 +70,13 @@ namespace JustParserLib
             Status = false;
         }
 
+        private void FailTask(ErrorType type)
+        {
+            ThrowError?.Invoke(ErrorType.WrongUrl);
+            Status = false;
+            WorkDone?.Invoke(this);
+        }
+
         public abstract string[] FindLinks(HtmlDocument document);
 
         public abstract Task<T> GetStrictData(string link);
@@ -91,26 +98,29 @@ namespace JustParserLib
             }
             catch (InvalidOperationException)
             {
-                ThrowError?.Invoke(ErrorType.WrongUrl);
-                Status = false;
-                WorkDone?.Invoke(this);
+                FailTask(ErrorType.WrongUrl);
                 return;
             }
 
             if (document == null)
             {
-                ThrowError?.Invoke(ErrorType.Null);
-                Status = false;
-                WorkDone?.Invoke(this);
+                FailTask(ErrorType.Null);
                 return;
             }
 
             var links = FindLinks(document);
 
+            if (links == null)
+            {
+                FailTask(ErrorType.WrongUrl);
+                return;
+            }
+
             var itemsCount = GetItemsCount(document);
             if (itemsCount <= 0)
             {
-                ThrowError?.Invoke(ErrorType.WrongUrl);
+                FailTask(ErrorType.WrongUrl);
+                return;
             }
 
             if (Settings.ItemsCount > 0)
