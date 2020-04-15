@@ -6,4 +6,7 @@
   <git-data>
     https://raw.githubusercontent.com/TheVenYear/just_parser/release/Data.xml
   </git-data>
+   <pirate-check>
+    true
+   </pirate-check>
 </program>
