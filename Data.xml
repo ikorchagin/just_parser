@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<program version="1.02" title="JustParser">
+<program version="1.1" title="JustParser">
   <git-link>
     https://codeload.github.com/TheVenYear/just_parser/zip/release
   </git-link>
   <git-data>
     https://raw.githubusercontent.com/TheVenYear/just_parser/release/Data.xml
   </git-data>
+  <pirate-check>
+    false
+  </pirate-check>
 </program>
