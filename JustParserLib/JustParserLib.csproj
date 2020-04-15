@@ -53,7 +53,7 @@
     <Compile Include="Avito\AvitoParser.cs" />
     <Compile Include="Avito\AvitoParserSettings.cs" />
     <Compile Include="Core\AgentType.cs" />
-    <Compile Include="Core\DataTableExtension.cs" />
+    <Compile Include="Extensions\DataTableExtension.cs" />
     <Compile Include="Core\ErrorType.cs" />
     <Compile Include="Core\IParserSettings.cs" />
     <Compile Include="Core\ParserBase.cs" />

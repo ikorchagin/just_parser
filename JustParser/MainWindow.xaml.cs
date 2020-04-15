@@ -21,6 +21,7 @@ using System.Net;
 using System.IO.Compression;
 using System.IO;
 using System.Diagnostics;
+using forms = System.Windows.Forms;
 
 namespace JustParser
 {
@@ -35,6 +36,10 @@ namespace JustParser
             this.Title = GetProgramName();
             InitializeComponent();
             CheckForUpdates();
+            if (File.Exists("Unpacker.exe"))
+            {
+                File.Delete("Unpacker.exe");
+            }
         }
 
         private string GetProgramName()
@@ -88,11 +93,29 @@ namespace JustParser
             }
         }
 
-        private void Parser_Start(object sender, RoutedEventArgs e)
+        private async Task<bool> PirateCheck()
         {
+            using (WebClient client = new WebClient())
+            {
+                var reader = new XmlTextReader(@"Data.xml");
+                reader.ReadToFollowing("git-data");
+                var response = await client.DownloadStringTaskAsync(reader.ReadElementContentAsString());
+                var document = new XmlDocument();
+                document.LoadXml(response);
+                var result = document.SelectSingleNode(".//program/pirate-check").InnerText.Replace(" ", "");
+                return result.Contains("true");
+            }
+        }
+
+        private async void Parser_Start(object sender, RoutedEventArgs e)
+        {
+            if (await PirateCheck())
+            {
+                SetError("Парсер временно отключен разработчиком");
+                return;
+            }
             startBtn.IsEnabled = false;
             progress.Visibility = Visibility.Visible;
-
             if (hasLimitation.IsChecked.Value && int.TryParse(itemsCount.Text, out var count))
             {
                 parser = new AvitoParser(new AvitoParserSettings() { Url = link.Text, ItemsCount = count });

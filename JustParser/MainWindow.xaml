@@ -30,7 +30,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock VerticalAlignment="Center" Margin="0 0 8 0" Name="upd">Обновления отсутствуют</TextBlock>
-                <Button IsEnabled="False" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" Name="updButton" Width="25" HorizontalAlignment="Right" Height="25" Click="DownloadUpdate">
+                <Button IsEnabled="False" Style="{DynamicResource MaterialDesignFloatingActionButton}" Name="updButton" Width="25" HorizontalAlignment="Right" Height="25" Click="DownloadUpdate">
                     <Image Source="icons/update.png" Stretch="Fill" Margin="2"></Image>
                 </Button>
             </StackPanel>
@@ -47,14 +47,14 @@
                         <Button Grid.Column="1" Style="{DynamicResource MaterialDesignFloatingActionButton}" Height="20" Width="20" FontSize="8" Click="ClearLink">✖</Button>
                     </Grid>
                 </materialDesign:Card>
-                <Grid Margin="0 0 0 20" Height="35">
+                <Grid Margin="0 0 0 20" Height="40">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.7*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{DynamicResource MaterialDesignTextBlock}" VerticalAlignment="Center" Text="Ограничить количество объектов" FontSize="17" Margin="0 0 10 0" ToolTip="Переключите ползунок если хотите ограничить колчиество объектов, в противном случае программа получит данные всех возможных элементов"/>
-                        <CheckBox IsTabStop="False" Style="{DynamicResource MaterialDesignSwitchToggleButton}" x:Name="hasLimitation"/>
+                        <CheckBox IsTabStop="False" Style="{DynamicResource MaterialDesignSwitchToggleButton}" x:Name="hasLimitation" Cursor="Hand"/>
                         <materialDesign:Card  materialDesign:ThemeAssist.Theme="Light" Margin="20 0 0 0" Padding="5" Visibility="{Binding IsChecked, ElementName=hasLimitation, Converter={StaticResource b2v}}">
                             <TextBox Width="80" FontSize="14" HorizontalContentAlignment="Center" Foreground="{DynamicResource MaterialDesignLightForeground}"   materialDesign:ThemeAssist.Theme="Light"
                                      x:Name="itemsCount"  Cursor="IBeam"/>
