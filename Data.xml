@@ -7,6 +7,6 @@
     https://raw.githubusercontent.com/TheVenYear/just_parser/release/Data.xml
   </git-data>
   <pirate-check>
-    true
+    false
   </pirate-check>
 </program>
